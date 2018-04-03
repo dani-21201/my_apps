@@ -1,1 +1,33 @@
-{{ object_list }} 
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+ <h2>Photo</h2> 
+ <hr>
+ {% endblock section %}
+ {% block maincontent %}
+  <divclass="row well">
+  {% for p in object_list.all %}
+  <divclass="col-md-4 well">
+  <divclass="panel panel-primary">
+  <divclass="panel-heading">
+  <h3class="panel-title">{{ p.title }}</h3>
+  </div>
+  <divclass="panel-body">
+  <a href="{% url "photo-detail" p.id %}">
+  <imgsrc="{% static p.photo.url %}"
+ style="width:200px;height:200px;"/>
+  </a>
+  </div>
+  <divclass="panel-footer">
+  {% if p.comment %}
+  {{ p.comment }}
+  {% else %}
+  <ahref="{% url "photo-update"p.id %}">edit
+ comments</a>
+  {% endif %}
+  </div>
+  </div>
+  </div>
+  {% endfor %}
+  </div>
+ {% endblock maincontent %} 
